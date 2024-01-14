@@ -4,11 +4,18 @@ export type UserLoginType = {
 }
 
 export type UserType = {
-  userId: string
   loginType: number
   userName: string
   passWord: string
-  role: string
-  roleId: string
-  permissions: string | string[]
+}
+
+export type UserInfo = {
+  loginId: string
+  userName: string
+  tokenName: string
+  tokenValue: string
+  loginDevice: string
+  tag: string
+  roles: string[]
+  permissions: string[]
 }

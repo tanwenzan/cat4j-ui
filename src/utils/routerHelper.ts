@@ -103,7 +103,9 @@ export const generateRoutesByServer = (routes: AppCustomRouteRecordRaw[]): AppRo
       meta: route.meta
     }
     if (route.component) {
-      const comModule = modules[`../${route.component}.vue`] || modules[`../${route.component}.tsx`]
+      debugger
+      const comModule =
+        modules[`../views${route.component}.vue`] || modules[`../${route.component}.tsx`]
       const component = route.component as string
       if (!comModule && !component.includes('#')) {
         console.error(`未找到${route.component}.vue文件或${route.component}.tsx文件，请创建`)

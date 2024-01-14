@@ -3,6 +3,7 @@ import { ElMessage } from 'element-plus'
 import qs from 'qs'
 import { SUCCESS_CODE } from '@/constants'
 import { useUserStoreWithOut } from '@/store/modules/user'
+import { useUserStore } from '@/store/modules/user'
 
 const defaultRequestInterceptors = (config: InternalAxiosRequestConfig) => {
   if (
@@ -10,6 +11,11 @@ const defaultRequestInterceptors = (config: InternalAxiosRequestConfig) => {
     config.headers['Content-Type'] === 'application/x-www-form-urlencoded'
   ) {
     config.data = qs.stringify(config.data)
+  }
+  const userStore = useUserStore()
+  // 将token添加到请求头中, 如果token存在的话
+  if (userStore.getToken) {
+    config.headers[userStore.getTokenKey] = userStore.getToken
   }
   if (config.method === 'get' && config.params) {
     let url = config.url as string

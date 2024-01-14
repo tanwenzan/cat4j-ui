@@ -2,7 +2,6 @@ import { isArray, isObject } from '@/utils/is'
 
 export const useStorage = (type: 'sessionStorage' | 'localStorage' = 'sessionStorage') => {
   const setStorage = (key: string, value: any) => {
-    debugger
     window[type].setItem(key, isArray(value) || isObject(value) ? JSON.stringify(value) : value)
   }
 
