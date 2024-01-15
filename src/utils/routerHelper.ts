@@ -7,6 +7,9 @@ import type {
 } from 'vue-router'
 import { isUrl } from '@/utils/is'
 import { omit, cloneDeep } from 'lodash-es'
+import { useI18n } from '@/hooks/web/useI18n'
+
+const { t } = useI18n()
 
 const modules = import.meta.glob('../views/**/*.{vue,tsx}')
 
@@ -103,7 +106,6 @@ export const generateRoutesByServer = (routes: AppCustomRouteRecordRaw[]): AppRo
       meta: route.meta
     }
     if (route.component) {
-      debugger
       const comModule =
         modules[`../views${route.component}.vue`] || modules[`../${route.component}.tsx`]
       const component = route.component as string
@@ -114,6 +116,9 @@ export const generateRoutesByServer = (routes: AppCustomRouteRecordRaw[]): AppRo
         data.component =
           component === '#' ? Layout : component.includes('##') ? getParentLayout() : comModule
       }
+    }
+    if (route.meta && route.meta.title) {
+      route.meta.title = t(route.meta.title)
     }
     // recursive child routes
     if (route.children) {

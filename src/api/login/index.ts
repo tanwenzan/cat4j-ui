@@ -14,7 +14,7 @@ export const loginApi = (data: UserType): Promise<IResponse<UserType>> => {
 }
 
 export const loginOutApi = (): Promise<IResponse> => {
-  return request.post({ url: '/user/loginOut' })
+  return request.post({ url: '/auth/loginOut' })
 }
 
 export const getRouterByUserIdApi = (): Promise<IResponse<AppCustomRouteRecordRaw[]>> => {
