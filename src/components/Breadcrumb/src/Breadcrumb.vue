@@ -24,7 +24,7 @@ export default defineComponent({
   name: 'Breadcrumb',
   setup() {
     const { currentRoute } = useRouter()
-
+    debugger
     const { t } = useI18n()
 
     const levelList = ref<AppRouteRecordRaw[]>([])

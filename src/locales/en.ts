@@ -527,5 +527,9 @@ export default {
   inputPasswordDemo: {
     title: 'InputPassword',
     inputPasswordDes: 'Secondary packaging of Input components based on ElementPlus'
+  },
+  config: {
+    baseSetting: '基础设置',
+    menu: '菜单管理'
   }
 }

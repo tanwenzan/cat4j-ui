@@ -117,13 +117,13 @@ export const generateRoutesByServer = (routes: AppCustomRouteRecordRaw[]): AppRo
           component === '#' ? Layout : component.includes('##') ? getParentLayout() : comModule
       }
     }
+    if (route.meta && route.meta.title) {
+      route.meta.title = t(route.meta.title)
+    }
     // recursive child routes
     if (route.children) {
       data.children = generateRoutesByServer(route.children)
     }
-    debugger
-    data.meta.title = t(data?.meta?.title)
-    console.log(data)
     res.push(data as AppRouteRecordRaw)
   }
   return res
