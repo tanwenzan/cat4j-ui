@@ -1,9 +1,12 @@
 import { AxiosResponse, InternalAxiosRequestConfig } from './types'
 import { ElMessage } from 'element-plus'
 import qs from 'qs'
-import { SUCCESS_CODE } from '@/constants'
+import { NO_AUTH_CODE, SUCCESS_CODE } from '@/constants'
 import { useUserStoreWithOut } from '@/store/modules/user'
 import { useUserStore } from '@/store/modules/user'
+import { useI18n } from '@/hooks/web/useI18n'
+
+const { t } = useI18n()
 
 const defaultRequestInterceptors = (config: InternalAxiosRequestConfig) => {
   if (
@@ -37,14 +40,16 @@ const defaultResponseInterceptors = (response: AxiosResponse) => {
   if (response?.config?.responseType === 'blob') {
     // 如果是文件流，直接过
     return response
-  } else if (response.data.code === SUCCESS_CODE) {
+  }
+  const code = response.data.code
+  if (code === SUCCESS_CODE) {
     return response.data
+  } else if (code === NO_AUTH_CODE) {
+    ElMessage.error(t('common.noAuth'))
+    const userStore = useUserStoreWithOut()
+    userStore.logout()
   } else {
     ElMessage.error(response?.data?.message)
-    if (response?.data?.code === 401) {
-      const userStore = useUserStoreWithOut()
-      userStore.logout()
-    }
   }
 }
 

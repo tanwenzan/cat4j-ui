@@ -3,6 +3,8 @@
  */
 export const SUCCESS_CODE = 200
 
+export const NO_AUTH_CODE = 401
+
 /**
  * 请求contentType
  */

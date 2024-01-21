@@ -44,7 +44,8 @@ export default {
     refresh: '刷新',
     fullscreen: '全屏',
     size: '尺寸',
-    columnSetting: '列设置'
+    columnSetting: '列设置',
+    noAuth: '您暂未登录，请登录后再试~'
   },
   lock: {
     lockScreen: '锁定屏幕',
@@ -117,6 +118,13 @@ export default {
     codePlaceholder: '请输入验证码'
   },
   router: {
+    base: {
+      user: '用户管理',
+      role: '角色管理',
+      menu: '菜单管理',
+      department: '部门管理',
+      baseSetting: '系统管理'
+    },
     login: '登录',
     level: '多级菜单',
     menu: '菜单',
@@ -155,15 +163,11 @@ export default {
     exampleDetail: '综合示例 - 详情',
     errorPage: '错误页面',
     authorization: '权限管理',
-    user: '用户管理',
-    role: '角色管理',
     document: '文档',
     inputPassword: '密码输入框',
     sticky: '黏性',
     treeTable: '树形表格',
-    PicturePreview: '表格图片预览',
-    department: '部门管理',
-    menuManagement: '菜单管理'
+    PicturePreview: '表格图片预览'
   },
   permission: {
     hasPermission: '请设置操作权限值'
@@ -203,29 +207,6 @@ export default {
     friday: '周五',
     saturday: '周六',
     sunday: '周日'
-  },
-  workplace: {
-    goodMorning: '早安',
-    happyDay: '祝你开心每一天!',
-    toady: '今日晴',
-    project: '项目数',
-    access: '项目访问',
-    toDo: '待办',
-    introduction: '一个正经的简介',
-    more: '更多',
-    shortcutOperation: '快捷操作',
-    operation: '操作',
-    index: '指数',
-    personal: '个人',
-    team: '团队',
-    quote: '引用',
-    contribution: '贡献',
-    hot: '热度',
-    yield: '产量',
-    dynamic: '动态',
-    push: '推送',
-    pushCode: 'Archer 推送 代码到 Github',
-    follow: '关注'
   },
   formDemo: {
     input: '输入框',

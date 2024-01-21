@@ -7,8 +7,11 @@ import type {
 } from 'vue-router'
 import { isUrl } from '@/utils/is'
 import { omit, cloneDeep } from 'lodash-es'
+import { useI18n } from '@/hooks/web/useI18n'
 
 const modules = import.meta.glob('../views/**/*.{vue,tsx}')
+
+const { t } = useI18n()
 
 /* Layout */
 export const Layout = () => import('@/layout/Layout.vue')
@@ -103,7 +106,6 @@ export const generateRoutesByServer = (routes: AppCustomRouteRecordRaw[]): AppRo
       meta: route.meta
     }
     if (route.component) {
-      debugger
       const comModule =
         modules[`../views${route.component}.vue`] || modules[`../${route.component}.tsx`]
       const component = route.component as string
@@ -119,6 +121,9 @@ export const generateRoutesByServer = (routes: AppCustomRouteRecordRaw[]): AppRo
     if (route.children) {
       data.children = generateRoutesByServer(route.children)
     }
+    debugger
+    data.meta.title = t(data?.meta?.title)
+    console.log(data)
     res.push(data as AppRouteRecordRaw)
   }
   return res

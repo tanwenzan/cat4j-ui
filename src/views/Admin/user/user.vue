@@ -5,7 +5,7 @@ import { useI18n } from '@/hooks/web/useI18n'
 import { ref } from 'vue'
 
 defineOptions({
-  name: 'MenuConfig'
+  name: 'MenuAdmin'
 })
 
 const { t } = useI18n()
