@@ -1,5 +1,4 @@
 import { ElSubMenu, ElMenuItem } from 'element-plus'
-import { hasOneShowingChild } from '../helper'
 import { isUrl } from '@/utils/is'
 import { useRenderMenuTitle } from './useRenderMenuTitle'
 import { useDesign } from '@/hooks/web/useDesign'
@@ -16,18 +15,13 @@ export const useRenderMenuItem = (
       .filter((v) => !v.meta?.hidden)
       .map((v) => {
         const meta = v.meta ?? {}
-        const { oneShowingChild, onlyOneChild } = hasOneShowingChild(v.children, v)
-        const fullPath = isUrl(v.path) ? v.path : pathResolve(parentPath, v.path) // getAllParentPath<AppRouteRecordRaw>(allRouters, v.path).join('/')
+        const fullPath = isUrl(v.path) ? v.path : pathResolve(parentPath, v.path)
 
-        if (
-          oneShowingChild &&
-          (!onlyOneChild?.children || onlyOneChild?.noShowingChildren) &&
-          !meta?.alwaysShow
-        ) {
+        if (!v.children && !meta?.alwaysShow) {
           return (
-            <ElMenuItem index={onlyOneChild ? pathResolve(fullPath, onlyOneChild.path) : fullPath}>
+            <ElMenuItem index={fullPath}>
               {{
-                default: () => renderMenuTitle(onlyOneChild ? onlyOneChild?.meta : meta)
+                default: () => renderMenuTitle(meta)
               }}
             </ElMenuItem>
           )

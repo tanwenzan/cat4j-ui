@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import type { App } from 'vue'
-import { Layout, getParentLayout } from '@/utils/routerHelper'
+import { Layout } from '@/utils/routerHelper'
 import { useI18n } from '@/hooks/web/useI18n'
 
 const { t } = useI18n()
@@ -57,62 +57,65 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
 
 export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
-    path: '/level',
+    path: '/admin',
     component: Layout,
-    redirect: '/level/menu1/menu1-1/menu1-1-1',
-    name: 'Level',
+    redirect: '/admin/global',
+    name: 'Admin',
     meta: {
-      title: t('router.level'),
+      title: t('router.base.baseSetting'),
       icon: 'carbon:skill-level-advanced'
     },
     children: [
-      {
-        path: 'menu1',
-        name: 'Menu1',
-        component: getParentLayout(),
-        redirect: '/level/menu1/menu1-1/menu1-1-1',
-        meta: {
-          title: t('router.menu1')
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            name: 'Menu11',
-            component: getParentLayout(),
-            redirect: '/level/menu1/menu1-1/menu1-1-1',
-            meta: {
-              title: t('router.menu11'),
-              alwaysShow: true
-            },
-            children: [
-              {
-                path: 'menu1-1-1',
-                name: 'Menu111',
-                component: () => import('@/views/Level/Menu111.vue'),
-                meta: {
-                  title: t('router.menu111')
-                }
-              }
-            ]
-          },
-          {
-            path: 'menu1-2',
-            name: 'Menu12',
-            component: () => import('@/views/Level/Menu12.vue'),
-            meta: {
-              title: t('router.menu12')
-            }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        name: 'Menu2',
-        component: () => import('@/views/Level/Menu2.vue'),
-        meta: {
-          title: t('router.menu2')
-        }
-      }
+      // {
+      //   path: 'menu',
+      //   name: 'Menu',
+      //   component: () => import('@/views/Admin/menu/menu.vue'),
+      //   meta: {
+      //     title: t('router.base.menu')
+      //   }
+      // }
+      // {
+      //   path: 'user',
+      //   name: 'User',
+      //   component: () => import('@/views/Admin/user/user.vue'),
+      //   meta: {
+      //     title: t('router.base.user')
+      //   }
+      // }
+      // {
+      //   path: 'global',
+      //   name: 'Global',
+      //   redirect: '/admin/global/menu',
+      //   meta: {
+      //     title: '全局管理'
+      //   },
+      //   children: [
+      //     {
+      //       path: 'menu',
+      //       name: 'Menu',
+      //       component: () => import('@/views/Admin/menu/menu.vue'),
+      //       meta: {
+      //         title: t('router.base.menu')
+      //       }
+      //     },
+      //     {
+      //       path: 'user',
+      //       name: 'User',
+      //       component: () => import('@/views/Admin/user/user.vue'),
+      //       meta: {
+      //         title: t('router.base.user')
+      //       }
+      //     }
+      //   ]
+      // }
+      // {
+      //   path: 'menu2',
+      //   name: 'Menu2',
+      //   component: () => import('@/views/Level/Menu2.vue'),
+      //   meta: {
+      //     title: t('router.menu2')
+      //   }
+      // }
     ]
   }
 ]

@@ -259,11 +259,6 @@ const buildRouter = async () => {
     push({ path: redirect.value || permissionStore.addRouters[0].path })
   }
 }
-
-// 去注册页面
-const toRegister = () => {
-  emit('to-register')
-}
 </script>
 
 <template>

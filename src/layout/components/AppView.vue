@@ -6,7 +6,6 @@ import { computed } from 'vue'
 
 const appStore = useAppStore()
 
-debugger
 const layout = computed(() => appStore.getLayout)
 
 const fixedHeader = computed(() => appStore.getFixedHeader)
