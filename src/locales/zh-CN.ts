@@ -169,6 +169,20 @@ export default {
     treeTable: '树形表格',
     PicturePreview: '表格图片预览'
   },
+  columns: {
+    menu: {
+      code: '菜单编码',
+      name: '菜单名称',
+      permission: '菜单权限标识',
+      path: '前端UI路径',
+      icon: '图标',
+      sortOrder: '排序值',
+      keepAlive: '是否存活',
+      type: '类型',
+      menuType: '菜单类型',
+      menuConfig: '菜单配置'
+    }
+  },
   permission: {
     hasPermission: '请设置操作权限值'
   },

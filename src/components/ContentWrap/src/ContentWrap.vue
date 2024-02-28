@@ -11,10 +11,13 @@ defineProps({
   title: propTypes.string.def(''),
   message: propTypes.string.def('')
 })
+
+const fullClass =
+  'w-[calc(100%-var(--app-content-padding)-var(--app-content-padding))] !min-h-[calc(100%-var(--app-content-padding)-var(--app-footer-height))]'
 </script>
 
 <template>
-  <ElCard :class="[prefixCls]" shadow="never">
+  <ElCard :class="[prefixCls, fullClass]" style="position: absolute" shadow="always">
     <template v-if="title" #header>
       <div class="flex items-center">
         <span class="text-16px font-700">{{ title }}</span>

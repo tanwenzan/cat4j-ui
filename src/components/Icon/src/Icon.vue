@@ -5,9 +5,13 @@ import { propTypes } from '@/utils/propTypes'
 import { useDesign } from '@/hooks/web/useDesign'
 import { Icon } from '@iconify/vue'
 
+import { useIconState } from '@/store/modules/icon'
+
 const { getPrefixCls } = useDesign()
 
 const prefixCls = getPrefixCls('icon')
+
+const iconState = useIconState()
 
 const props = defineProps({
   // icon name
@@ -21,13 +25,17 @@ const props = defineProps({
 
 const isLocal = computed(() => props.icon.startsWith('svg-icon:'))
 
+const isRemote = computed(() => props.icon.startsWith('remote:'))
+
 const isCode = computed(() => props.icon.startsWith('code:'))
 const codeId = computed(() => {
   return unref(isCode) ? props.icon.split('code:')[1] : props.icon
 })
 
 const symbolId = computed(() => {
-  return unref(isLocal) ? `#icon-${props.icon.split('svg-icon:')[1]}` : props.icon
+  return unref(isLocal)
+    ? `#icon-${props.icon.split('svg-icon:')[1]}`
+    : iconState.findById(props.icon.split('remote:')[1])
 })
 
 // 是否使用在线图标
@@ -52,6 +60,7 @@ const getIconifyStyle = computed(() => {
     <svg v-else-if="isLocal" aria-hidden="true">
       <use :xlink:href="symbolId" />
     </svg>
+    <span v-else-if="isRemote" v-html="symbolId"> </span>
 
     <template v-else>
       <Icon v-if="isUseOnline" :icon="icon" :style="getIconifyStyle" />
