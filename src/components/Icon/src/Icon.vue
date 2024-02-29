@@ -27,11 +27,6 @@ const isLocal = computed(() => props.icon.startsWith('svg-icon:'))
 
 const isRemote = computed(() => props.icon.startsWith('remote:'))
 
-const isCode = computed(() => props.icon.startsWith('code:'))
-const codeId = computed(() => {
-  return unref(isCode) ? props.icon.split('code:')[1] : props.icon
-})
-
 const symbolId = computed(() => {
   return unref(isLocal)
     ? `#icon-${props.icon.split('svg-icon:')[1]}`
@@ -54,10 +49,7 @@ const getIconifyStyle = computed(() => {
 
 <template>
   <ElIcon :class="prefixCls" :size="size" :color="color">
-    <template v-if="isCode">
-      <component :is="codeId" />
-    </template>
-    <svg v-else-if="isLocal" aria-hidden="true">
+    <svg v-if="isLocal" aria-hidden="true">
       <use :xlink:href="symbolId" />
     </svg>
     <span v-else-if="isRemote" v-html="symbolId"> </span>

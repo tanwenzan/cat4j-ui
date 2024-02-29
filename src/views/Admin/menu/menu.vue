@@ -10,7 +10,9 @@ import { ElLink } from 'element-plus'
 import { Icon } from '@/components/Icon'
 import { Search } from '@/components/Search'
 import { FormSchema } from '@/components/Form'
-// const fullClass = '!min-h-[calc(100%-var(--app-content-padding)-var(--app-footer-height)-100px)]'
+import { hasPermi } from '@/components/Permission'
+
+const { t } = useI18n()
 
 // table元素
 const tableRef = ref()
@@ -18,7 +20,7 @@ const tableRef = ref()
 const tableHeight = ref()
 
 onMounted(() => {
-  // 设置表格初始高度为innerHeight-offsetTop-表格底部与浏览器底部距离85
+  // 设置表格初始高度为 innerHeight-offsetTop-表格底部与浏览器底部距离85
   tableHeight.value =
     tableRef.value.$el.offsetParent.clientHeight -
     tableRef.value.$el.offsetTop * 2 -
@@ -56,8 +58,6 @@ const { tableRegister, tableState } = useTable({
 
 const { loading, dataList, total, currentPage, pageSize } = tableState
 
-const { t } = useI18n()
-
 const columns = reactive<TableColumn[]>([
   {
     field: 'selection',
@@ -78,9 +78,16 @@ const columns = reactive<TableColumn[]>([
     minWidth: 150,
     formatter: (record: Recordable, __: TableColumn, cellValue: string) => {
       return (
-        <ElLink type="primary">
-          <Icon icon={record.icon} style="padding-right:5px;" /> {t(cellValue)}
-        </ElLink>
+        <template>
+          <template v-if="hasPermi('menu.edit')">
+            <ElLink type="primary">
+              <Icon icon={record.icon} style="padding-right:5px;" /> {t(cellValue)}
+            </ElLink>
+          </template>
+          <template v-else>
+            <Icon icon={record.icon} style="padding-right:5px;" /> {t(cellValue)}
+          </template>
+        </template>
       )
     }
   },
@@ -110,8 +117,8 @@ defineOptions({
 })
 const schema = reactive<FormSchema[]>([
   {
-    field: 'field1',
-    label: 'input',
+    field: 'name',
+    label: t('columns.menu.name'),
     component: 'Input'
   }
 ])
